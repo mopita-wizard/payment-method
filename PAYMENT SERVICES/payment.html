@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Payment Method</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+
+    <div class="checkout-card">
+        <header class="header">
+            <h1>Payment Method</h1>
+            <p>Select your preferred service provider</p>
+        </header>
+
+        <form id="paymentForm">
+            <label class="payment-option">
+                <input type="radio" name="method" value="mpesa" checked>
+                <div class="option-content">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/512px-M-PESA_LOGO-01.svg.png" alt="M-Pesa" class="logo">
+                    <div class="text">
+                        <span class="method-name">M-Pesa</span>
+                        <span class="method-desc">Pay via Lipa na M-Pesa</span>
+                    </div>
+                    <div class="custom-radio"></div>
+                </div>
+            </label>
+
+            <label class="payment-option">
+                <input type="radio" name="method" value="equity">
+                <div class="option-content">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Equity_Bank_Logo.png/640px-Equity_Bank_Logo.png" alt="Equity Bank" class="logo">
+                    <div class="text">
+                        <span class="method-name">Equity Bank</span>
+                        <span class="method-desc">EazzyPay or Bank Transfer</span>
+                    </div>
+                    <div class="custom-radio"></div>
+                </div>
+            </label>
+
+            <button type="submit" class="submit-btn">Continue to Payment</button>
+        </form>
+
+        <footer class="footer">
+            <p>Secure Connection Active</p>
+        </footer>
+    </div>
+
+    <script src="payment.js"></script>
+</body>
+</html>

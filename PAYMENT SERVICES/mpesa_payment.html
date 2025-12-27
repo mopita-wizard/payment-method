@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Checkout</title>
+    <link rel="stylesheet" href="mpesa_payment.css">
+    <style>
+        /* Loading Overlay Styles */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 1000;
+            color: white;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #28a745;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .stk-box {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="overlay">
+        <div class="spinner"></div>
+        <div class="stk-box">
+            <h3 style="color: #28a745;">STK Push Sent!</h3>
+            <p>Please check your phone and enter your <strong>M-Pesa PIN</strong> to authorize the payment.</p>
+            <button onclick="closeOverlay()" class="pay-btn" style="background: #333; margin-top: 15px;">I have paid</button>
+        </div>
+    </div>
+
+    <div class="checkout-card">
+        <div style="text-align:center;"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/M-PESA_LOGO-01.svg/512px-M-PESA_LOGO-01.svg.png" height="40"></div>
+        
+        <form id="paymentForm" style="margin-top:20px;">
+            <div class="input-group">
+                <label>Sending To:</label>
+                <input type="text" value="0720253833" class="readonly-input" readonly style="background:#f4f4f4; border:1px dashed #ccc; padding:10px; width:100%; border-radius:8px;">
+            </div>
+
+            <div class="input-group" style="margin-top:15px;">
+                <label>Your Phone Number:</label>
+                <input type="tel" id="senderPhone" placeholder="07XXXXXXXX" required style="width:100%; padding:12px; border-radius:8px; border:1px solid #ddd;">
+            </div>
+
+            <div class="input-group" style="margin-top:15px;">
+                <label>Amount (KES):</label>
+                <input type="number" id="amount" placeholder="Enter Amount" required style="width:100%; padding:12px; border-radius:8px; border:1px solid #ddd;">
+            </div>
+
+            <button type="submit" class="submit-btn" style="background: #28a745; color:white; width:100%; padding:15px; border-radius:10px; border:none; margin-top:20px; font-weight:bold; cursor:pointer;">
+                Initiate M-Pesa Payment
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevents page from reloading
+
+            const phone = document.getElementById('senderPhone').value;
+            const amt = document.getElementById('amount').value;
+
+            // Simple validation
+            if(phone.length < 10) {
+                alert("Please enter a valid phone number.");
+                return;
+            }
+
+            // Trigger the visual prompt
+            showPrompt();
+        });
+
+        function showPrompt() {
+            document.getElementById('overlay').style.display = 'flex';
+        }
+
+        function closeOverlay() {
+            document.getElementById('overlay').style.display = 'none';
+            alert("Thank you for your payment. We are verifying your transaction.");
+            window.location.href = "index.html"; // Redirect back to home
+        }
+    </script>
+</body>
+</html>
